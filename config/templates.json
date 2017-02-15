@@ -2,6 +2,6 @@
   "input": "Project Name: ",
   "name": "cicada-custom-components",
   "gitlab": {
-     "cicada-custom-components": "https://github.com/antgod/git.git"
+     "cicada-custom-components": "git@gitlab.alipay-inc.com:cicada/cicada-cli.git"
   }
 }
