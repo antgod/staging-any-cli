@@ -1,0 +1,7 @@
+{
+  "input": "Project Name: ",
+  "name": "cicada-custom-components",
+  "gitlab": {
+     "cicada-custom-components": "https://github.com/antgod/git.git"
+  }
+}

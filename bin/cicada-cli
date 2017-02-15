@@ -1,0 +1,17 @@
+#!/usr/bin/env node 
+
+const init = require('../lib/command/init');
+const program = require('commander')
+
+program
+  .command('init')
+  .description('创建用户自定义组件脚手架')
+  .alias('i')
+  .action(()=>{
+    init.default()
+  })
+
+program.parse(process.argv)
+if(!program.args.length){
+  program.help()
+}
