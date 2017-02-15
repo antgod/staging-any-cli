@@ -1,11 +1,11 @@
 {
   "name": "@alipay/cicada-cli",
-  "version": "1.0.2",
+  "version": "1.0.32",
   "description": "",
   "main": "index.js",
   "scripts": {
     "build": "babel src --out-dir lib",
-    "publish": "npm version patch && tnpm publish"
+    "pub": "npm version patch && tnpm publish"
   },
   "author": "",
   "devDependencies": {
