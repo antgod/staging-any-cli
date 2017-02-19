@@ -1,39 +1,30 @@
 import "babel-polyfill"
-import { exec } from 'child_process'
-import co from 'co'
-import prompt from 'co-prompt'
-import chalk from 'chalk'
-import config from '../../config/templates.json'
+import path from 'path'
+import { promiseChain } from '../common/util'
+import cmd from '../common/cmd'
+import prompt from '../common/prompt'
+import { CUSTOM_SCHEMA } from '../common/constant'
 
-const generatorCode = ()=>({
-  gitClone: ({ gitSource, projectName }) => `git clone ${gitSource} ${projectName} && cd ${projectName}`,
-  npmInstall: () => 'tnpm i'
-})
+const parseCommands = (gitUrl, directory)=>
+  [{
+    cmd: `git clone ${gitUrl} ${directory}`,
+    msg: '下载脚手架'
+  }, {
+    cmd: `rm -rf ./.git`,
+    cwd: path.join(process.cwd(), directory),
+    msg: '删除git配置文件'
+  }]
 
+const initCommands = commands => commands.map(command=> cmd(command))
 
-export default function() {
-  co(function *() {
-    const { gitlab, name, input } = config
-    const projectName = yield prompt(input)
-    const gitSource = gitlab[name]
+const generatorProject = async function(config) {
+  const { custom, source } = config
+  const customComponents = source[custom]
+  const customs = await prompt(CUSTOM_SCHEMA)
+  const { device, directory } = customs
+  const gitUrl = customComponents[device]
 
-    const cmd = generatorCode();
-
-    console.log(chalk.yellow('\n 开始生成用户自定义组件脚手架'))
-
-    exec(cmd.gitClone({ gitSource, projectName }), (error) => {
-      if (error) {
-        console.log(error)
-        process.exit()
-      }
-      console.log(chalk.green('\n √ 用户自定义组件脚手架生成完毕'))
-
-      exec(cmd.npmInstall(), (error) => {
-        if (error) {
-          console.log(error)
-        }
-        process.exit()
-      })
-    })
-  })
+  promiseChain(...initCommands(parseCommands(gitUrl, directory)));
 }
+
+export default generatorProject

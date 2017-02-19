@@ -1,7 +1,10 @@
 {
   "input": "Project Name: ",
-  "name": "cicada-custom-components",
-  "gitlab": {
-     "cicada-custom-components": "git@gitlab.alipay-inc.com:cicada/cicada-custom-components.git"
+  "custom": "cicada-custom-components",
+  "source": {
+     "cicada-custom-components": {
+       "pc": "git@gitlab.alipay-inc.com:cicada/cicada-pc-components.git",
+       "mobile": "git@gitlab.alipay-inc.com:cicada/cicada-mobile-components.git"
+     }
   }
 }
