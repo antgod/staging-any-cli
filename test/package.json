@@ -1,0 +1,59 @@
+{
+  "name": "@alipay/cicada-pc-components",
+  "version": "1.0.1",
+  "description": "",
+  "main": "index.js",
+  "device": "",
+  "scripts": {
+    "start": "webpack-dev-server --progress --colors --content-base public --port 8003",
+    "check": "npm run lint && node ./scripts/pre-commit.js",
+    "lint": "eslint components",
+    "pub": "npm version patch && tnpm publish"
+  },
+  "author": "",
+  "devDependencies": {
+    "@alipay/cicada-components": "^0.0.201",
+    "@alipay/cicada-devtools": "^0.0.15",
+    "@alipay/cicada-render": "^0.0.132",
+    "antd": "^2.7.2",
+    "babel-core": "^6.5.2",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "classnames": "^2.2.5",
+    "css-loader": "^0.23.1",
+    "eslint": "^3.6.0",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-plugin-babel": "^3.0.0",
+    "eslint-plugin-import": "^1.6.1",
+    "eslint-plugin-jsx-a11y": "^2.0.1",
+    "eslint-plugin-markdown": "*",
+    "eslint-plugin-react": "^6.3.0",
+    "eslint-tinker": "^0.3.2",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.8.5",
+    "html-webpack-plugin": "^2.9.0",
+    "less": "^2.6.0",
+    "less-loader": "^2.2.2",
+    "lodash": "^4.17.4",
+    "pre-commit": "^1.2.2",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-hot-loader": "^1.3.0",
+    "style-loader": "^0.13.0",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "dependencies": {},
+  "pre-commit": [
+    "check"
+  ],
+  "publishConfig": {
+    "registry": "http://registry.npm.alibaba-inc.com"
+  },
+  "license": "ISC"
+}
