@@ -29,16 +29,13 @@ export const customSchema = {
 const parseCommands = (gitUrl, directory)=>
   [{
     cmd: `git clone ${gitUrl} ${directory}`,
-    msg: '自定义组件工程开始下载'
   }, {
     cmd: `rm -rf ./.git`,
     cwd: path.join(process.cwd(), directory),
-  },
-//    {
-//    cmd: 'tnpm i',
-//    cwd: path.join(process.cwd(), directory),
-//    msg:
-//  }
+  }, {
+    cmd: 'tnpm i',
+    cwd: path.join(process.cwd(), directory),
+  }
 ]
 
 const getPackage = (behavior, directory, relativePath, code) => () => behavior(path.join(process.cwd(), directory, relativePath), code)
@@ -56,7 +53,7 @@ const generatorProject = async function(config) {
   console.log('自定义组件配置开始')
   promiseChain(...initCommands(parseCommands(gitUrl, directory))).then(getPackage(fs.readFileSync, directory, 'package.json', 'utf8')).then(parsePackage).then(resolvePackageName(directory)).then(setPackageName(fs.writeFile, directory, 'package.json', (err)=> {
     if (err) throw err;
-    console.log('自定义组件配置结束');
+    console.log('自定义组件配置结束')
   }))
 }
 
