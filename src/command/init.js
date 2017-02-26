@@ -1,10 +1,12 @@
-import "babel-polyfill"
+import 'babel-polyfill'
+import fs from 'fs'
 import path from 'path'
 import { promiseChain } from '../common/util'
 import cmd from '../common/cmd'
 import prompt from '../common/prompt'
+import { stringify } from '../common/json'
 
-const initCommands = commands => commands.map(command=> cmd(command))
+const initCommands = commands => commands.map(command => cmd(command))
 
 export const customSchema = {
   properties: {
@@ -12,30 +14,37 @@ export const customSchema = {
       description: '设备(pc/mobile)',
       pattern: /^pc$|^mobile$/,
       message: '设备必须是pc/mobile中之一，且不能为空',
-      required: true
+      required: true,
     },
     directory: {
-      description: '本地目录',
+      description: '发布包名',
+      /*eslint-disable*/
       pattern: /^[a-zA-Z\-\_\d]+$/,
       message: '目录只能包含字母/数字/下划线/中划线，且不能为空',
-      required: true
-    }
-  }
-};
+      required: true,
+    },
+  },
+}
 
 const parseCommands = (gitUrl, directory)=>
   [{
     cmd: `git clone ${gitUrl} ${directory}`,
-    msg: '下载脚手架'
+    msg: '自定义组件工程开始下载'
   }, {
     cmd: `rm -rf ./.git`,
     cwd: path.join(process.cwd(), directory),
-    msg: '删除git配置文件'
-  }, {
-    cmd: 'tnpm i',
-    cwd: path.join(process.cwd(), directory),
-    msg: '安装依赖包'
-  }]
+  },
+//    {
+//    cmd: 'tnpm i',
+//    cwd: path.join(process.cwd(), directory),
+//    msg:
+//  }
+]
+
+const getPackage = (behavior, directory, relativePath, code) => () => behavior(path.join(process.cwd(), directory, relativePath), code)
+const parsePackage = packageMessage => JSON.parse(packageMessage)
+const resolvePackageName = directory => packageMessage => stringify({ ...packageMessage, name: directory }, 2)
+const setPackageName = (behavior, directory, relativePath, callback) => packageMessage => behavior(path.join(process.cwd(), directory, relativePath), packageMessage, callback)
 
 const generatorProject = async function(config) {
   const { custom, source } = config
@@ -44,7 +53,11 @@ const generatorProject = async function(config) {
   const { device, directory } = customs
   const gitUrl = customComponents[device]
 
-  promiseChain(...initCommands(parseCommands(gitUrl, directory)));
+  console.log('自定义组件配置开始')
+  promiseChain(...initCommands(parseCommands(gitUrl, directory))).then(getPackage(fs.readFileSync, directory, 'package.json', 'utf8')).then(parsePackage).then(resolvePackageName(directory)).then(setPackageName(fs.writeFile, directory, 'package.json', (err)=> {
+    if (err) throw err;
+    console.log('自定义组件配置结束');
+  }))
 }
 
 export default generatorProject
