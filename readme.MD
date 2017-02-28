@@ -8,7 +8,7 @@ $tnpm i @alipay/cicada-cli -g
 ```
 2. 执行脚手架命令
 ```
-$cicada-cli init
+$cicada init
 ```
 3. 输入设备(pc/mobile)，发布包名（注意，包名不能重复）, 回车确定。
 ```
