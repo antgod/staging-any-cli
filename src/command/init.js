@@ -1,4 +1,3 @@
-import 'babel-polyfill'
 import fs from 'fs'
 import path from 'path'
 import { promiseChain } from '../common/util'
@@ -32,16 +31,8 @@ const parseCommands = (gitUrl, directory)=>
   }, {
     cmd: `rm -rf ./.git`,
     cwd: path.join(process.cwd(), directory),
-  }, {
-    cmd: 'tnpm i',
-    cwd: path.join(process.cwd(), directory),
   }
 ]
-
-const getPackage = (behavior, directory, relativePath, code) => () => behavior(path.join(process.cwd(), directory, relativePath), code)
-const parsePackage = packageMessage => JSON.parse(packageMessage)
-const resolvePackageName = directory => packageMessage => stringify({ ...packageMessage, name: directory }, 2)
-const setPackageName = (behavior, directory, relativePath, callback) => packageMessage => behavior(path.join(process.cwd(), directory, relativePath), packageMessage, callback)
 
 const generatorProject = async function(config) {
   const { custom, source } = config
@@ -51,10 +42,18 @@ const generatorProject = async function(config) {
   const gitUrl = customComponents[device]
 
   console.log('自定义组件配置开始')
-  promiseChain(...initCommands(parseCommands(gitUrl, directory))).then(getPackage(fs.readFileSync, directory, 'package.json', 'utf8')).then(parsePackage).then(resolvePackageName(directory)).then(setPackageName(fs.writeFile, directory, 'package.json', (err)=> {
-    if (err) throw err;
-    console.log('自定义组件配置结束')
-  }))
+
+  const updatePackageName = () => {
+    const indent = 2
+    const relative = 'package.json'
+    const oldPackage = require(path.join(process.cwd(), directory, relative))
+    const newPackage = stringify({ ...oldPackage, name: directory }, indent)
+    fs.writeFileSync(path.join(process.cwd(), directory, relative), newPackage);
+  }
+
+  promiseChain(...initCommands(parseCommands(gitUrl, directory)))
+    .then(updatePackageName)
+    .then(()=>console.log('自定义组件配置结束'))
 }
 
 export default generatorProject
