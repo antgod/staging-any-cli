@@ -45,5 +45,19 @@ git add . && git commit -m 'message' && git push origin master
 #创建用户名密码
 tnpm addUser
 #发布
+
+##bz发布
 tnpm run publish
+
+##stable发布
+NODE_ENV=stable tnpm run publish
 ```
+
++ 使用
+
+    - 金蝉创建/修改页面配置
+    - 添加自定义组件
+    - 选择名称（即发布包名：cicada-crm-common-component）
+    - 选择版本
+    - 创建页面后，预览时在组件树上可以选择自定义组件，属性编辑同其他组件
+    - 调试-同其他组件
