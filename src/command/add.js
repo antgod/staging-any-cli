@@ -41,7 +41,6 @@ const getInfo = ({ name, git, branch }) => {
 const addInfo = pkgConfig => writeConfig(stringify(pkgConfig, 2), 'New template added')
 
 module.exports = async() => {
-  // 分步接收用户输入的参数
   const customInfo = await prompt(customSchema)
   compose(valitInfo, getInfo, addInfo)(customInfo)
 }

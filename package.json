@@ -3,32 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "engines": {
-    "install-node": "7.6.0"
-  },
   "scripts": {
-    "test": "node ./bin/cicada i",
-    "build": "babel src --out-dir lib -w",
-    "pub": "npm version patch && tnpm publish",
+    "pub": "npm version patch && npm publish",
     "pre-commit": "eslint src"
   },
-  "author": "",
+  "author": "antgod",
   "devDependencies": {
-    "babel-cli": "^6.7.7",
-    "babel-core": "^6.7.7",
-    "babel-eslint": "^7.1.0",
-    "babel-loader": "^6.2.4",
-    "babel-plugin-import": "^1.1.0",
-    "babel-plugin-transform-builtin-extend": "^1.1.0",
-    "babel-plugin-transform-decorators-legacy": "^1.3.4",
-    "babel-plugin-transform-runtime": "^6.9.0",
-    "babel-plugin-transform-remove-strict-mode": "0.0.2",
-    "babel-preset-es2015": "^6.6.0",
-    "babel-preset-react": "^6.5.0",
-    "babel-preset-stage-0": "^6.5.0",
-    "babel-register": "^6.7.2",
-    "babel-runtime": "^6.11.6",
-    "css-loader": "^0.23.1",
     "eslint": "^3.16.1",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-plugin-babel": "^3.0.0",
@@ -37,36 +17,16 @@
     "eslint-plugin-markdown": "*",
     "eslint-plugin-react": "^6.3.0",
     "eslint-tinker": "^0.3.2",
-    "express": "^4.13.4",
-    "extract-text-webpack-plugin": "^1.0.1",
-    "file-loader": "^0.8.5",
-    "html-webpack-plugin": "^2.9.0",
-    "less": "^2.6.0",
-    "less-loader": "^2.2.2",
-    "react-hot-loader": "^1.3.0",
-    "style-loader": "^0.13.0",
-    "url-loader": "^0.5.7",
-    "webpack": "^1.12.14",
-    "webpack-dev-server": "^1.14.1"
+    "pre-commit": "^1.2.2"
   },
   "dependencies": {
-    "babel-preset-rax": "^0.0.9",
-    "bootstrap": "^3.3.6",
     "chalk": "^1.1.3",
     "child_process": "^1.0.2",
-    "classnames": "^2.2.5",
-    "co": "^4.6.0",
-    "co-prompt": "^1.0.0",
     "commander": "^2.9.0",
-    "core-decorators": "^0.15.0",
-    "element-loader": "^0.0.9",
-    "eslint": "^3.18.0",
-    "pre-commit": "^1.2.2",
-    "prompt": "^1.0.0",
-    "rax": "^0.0.9",
-    "react": "^0.14.7",
-    "react-dom": "^0.14.7",
-    "react-json-editor": "^0.2.0"
+    "prompt": "^1.0.0"
+  },
+  "engines": {
+    "install-node": "7.6.0"
   },
   "pre-commit": [
     "pre-commit"

@@ -42,8 +42,8 @@ const generatorProject = async function () {
   const { git, npm } = await prompt(customSchema)
   const list = await cmd({ cmd: 'any list' })
   const { git: url, branch } = compose(valitInfo, getInfo)(git, list)
-  const commands = parseCommands(url, branch, npm)
 
+  const commands = parseCommands(url, branch, npm)
   // 这里不能使用forEach，每个forEach回调都是一个async函数，而每个async函数互不关联共同执行
   for (let i = 0; i < commands.length; i++) {
     log(chalk.green(await cmd(commands[i])))

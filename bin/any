@@ -3,37 +3,44 @@ const add = require('../src/command/add')
 const list = require('../src/command/list')
 const init = require('../src/command/init')
 const del = require('../src/command/del')
-const config = require('../config/templates.json')
 const program = require('commander')
-const { version }= require('../package')
+const { version } = require('../package')
 
 // 定义当前版本
 program
 .version(version)
 
-// 定义使用方法
-program
-.usage('<command>')
-
+/*
+* 添加模板
+* */
 program
 .command('add')
 .description('add template')
 .alias('a')
 .action(add)
 
+/*
+ * 删除模板
+ * */
 program
 .command('del')
 .description('Delete a template')
 .alias('d')
 .action(del)
 
+/*
+ * 模板列表
+ * */
 program
 .command('list')
 .description('List all the templates')
 .alias('l')
 .action(list)
 
- program
+/*
+ * 删除初始化
+ * */
+program
 .command('init')
 .description('Generate a new project')
 .alias('i')
