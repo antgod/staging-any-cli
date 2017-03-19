@@ -1,6 +1,6 @@
-import prompt from 'prompt'
+const prompt = require('prompt')
 
-export default schema =>
+module.exports = schema =>
   new Promise((res, rej) => {
     prompt.start()
     prompt.get(schema, (error, result) => {

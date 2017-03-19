@@ -1,0 +1,45 @@
+#!/usr/bin/env node
+const add = require('../src/command/add')
+const list = require('../src/command/list')
+const init = require('../src/command/init')
+const del = require('../src/command/del')
+const config = require('../config/templates.json')
+const program = require('commander')
+const { version }= require('../package')
+
+// 定义当前版本
+program
+.version(version)
+
+// 定义使用方法
+program
+.usage('<command>')
+
+program
+.command('add')
+.description('add template')
+.alias('a')
+.action(add)
+
+program
+.command('del')
+.description('Delete a template')
+.alias('d')
+.action(del)
+
+program
+.command('list')
+.description('List all the templates')
+.alias('l')
+.action(list)
+
+ program
+.command('init')
+.description('Generate a new project')
+.alias('i')
+.action(init)
+
+program.parse(process.argv)
+if (!program.args.length) {
+  program.help()
+}

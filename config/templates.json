@@ -1,10 +1,6 @@
 {
-  "input": "Project Name: ",
-  "custom": "cicada-custom-components",
-  "source": {
-     "cicada-custom-components": {
-       "pc": "git@gitlab.alipay-inc.com:cicada/cicada-pc-components.git",
-       "mobile": "git@gitlab.alipay-inc.com:cicada/cicada-mobile-components.git"
-     }
+  "test": {
+    "git": "https://github.com/antgod/blog.git",
+    "branch": "master"
   }
 }

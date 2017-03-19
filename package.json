@@ -1,6 +1,6 @@
 {
-  "name": "@alipay/cicada-cli",
-  "version": "1.0.44",
+  "name": "any-cli",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "engines": {
@@ -60,6 +60,7 @@
     "commander": "^2.9.0",
     "core-decorators": "^0.15.0",
     "element-loader": "^0.0.9",
+    "eslint": "^3.18.0",
     "pre-commit": "^1.2.2",
     "prompt": "^1.0.0",
     "rax": "^0.0.9",
@@ -71,7 +72,7 @@
     "pre-commit"
   ],
   "bin": {
-    "cicada": "./bin/cicada"
+    "any": "./bin/any"
   },
   "publishConfig": {
     "registry": "http://registry.npm.alibaba-inc.com"
